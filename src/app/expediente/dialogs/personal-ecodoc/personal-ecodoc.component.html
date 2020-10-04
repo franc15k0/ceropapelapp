@@ -1,0 +1,126 @@
+<div class="modal-header">
+  <h4 class="modal-title centered">{{ title }}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="salirModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <!-- <div *ngIf="listPersonal.length == 0" class="form-group row rounded"> -->
+  <div class="col-md-12">
+    <form (keydown.enter)="$event.preventDefault()" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="nrodocumento" class="col-form-label col-sm-4">Número de DNI</label>
+
+        <div class="col-sm-5 pr-3">
+          <input type="text" (keypress)="numberOnly($event)" class="form-control"
+            (keyup.enter)="buscarDocumento($event)" formControlName="dni" name="nrodocumento" id="nrodocumento" />
+        </div>
+
+        <button class="btn btn-outline-success col-sm-2" role="button" type="button" (click)="buscarDocumento($event)">
+          Buscar
+        </button>
+
+        <div class="pl-3 pt-1">
+          <div class="alert-danger" *ngIf="isSubmitted">
+            <div class="container-error-message" *ngIf="!form.get('dni').value">
+              Es necesario buscar el documento
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="personal">
+        <div class="form-group row">
+          <label for="nombres" class="col-form-label col-sm-4">Nombres</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" [value]="personal.nombres" name="nombres" disabled />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="appellidos" class="col-form-label col-sm-4">Apellidos</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" [value]="personal.apellidos" name="appellidos" disabled />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="cargo" class="col-form-label col-sm-4">Cargo</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" formControlName="cargo" name="cargo" />
+          </div>
+          <div class="pl-3 pt-1">
+            <div class="alert-danger container-error-message" *ngIf="isSubmitted && f.cargo.invalid">
+              El cargo es requerido
+            </div>
+            <div class="alert-danger" *ngIf="f.cargo.invalid && (f.cargo.dirty || f.cargo.touched)">
+              <div class="container-error-message" *ngIf="f.cargo.errors.required">
+                El cargo es requerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="cargo" class="col-form-label col-sm-4">Unidad Organica</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" formControlName="unidadOrganica" name="cargo" />
+          </div>
+          <div class="pl-3 pt-1">
+            <div class="alert-danger container-error-message" *ngIf="isSubmitted && f.unidadOrganica.invalid">
+              La Unidad Organica es requerido
+            </div>
+            <div class="alert-danger" *ngIf="
+                  f.unidadOrganica.invalid &&
+                  (f.unidadOrganica.dirty || f.unidadOrganica.touched)
+                ">
+              <div class="container-error-message" *ngIf="f.unidadOrganica.errors.required">
+                La Unidad Organica esrequerido
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="correo" class="col-form-label col-sm-4">Correo Electronico</label>
+          <div class="col-sm-6">
+            <input type="email" class="form-control" formControlName="correo" name="correo" />
+          </div>
+          <div class="pl-3 pt-1">
+            <div class="alert-danger container-error-message pr-4" *ngIf="isSubmitted && f.correo.invalid">
+              Correo es requerido
+            </div>
+
+            <div class="alert-danger" *ngIf="f.correo.invalid && (f.correo.dirty || f.correo.touched)">
+              <div class="container-error-message" *ngIf="f.correo.errors.required">
+                Correo es requerido
+              </div>
+              <div class="container-error-message" *ngIf="f.correo.errors.minlength">
+                El correo deberia tener 5 caracteres.
+              </div>
+              <div class="container-error-message" *ngIf="
+                    (f.correo.dirty || f.correo.touched) &&
+                    f.correo.invalid &&
+                    f.correo.errors.pattern
+                  ">
+                El valor del correo es invalido.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- </div> -->
+  <div class="modal-footer centeredBot">
+    <div *ngIf="personal">
+      <button class="btn btn-success" (click)="onSubmit()">Guardar</button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-success" (click)="salirModal()">
+        Salir
+      </button>
+    </div>
+    <div *ngIf="!personal">
+      <button type="button" class="btn btn-success" (click)="salirModal()">
+        Salir
+      </button>
+    </div>
+  </div>
+</div>

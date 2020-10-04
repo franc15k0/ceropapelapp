@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrlCeroPapel: 'http://localhost:8080/restceropapel',
+  /* apiUrlValidacion:
+    'https://pruebamesavirtual.minam.gob.pe:8443/TransparenciaWSREST/tramites/transparencia', */
 };
 
 /*

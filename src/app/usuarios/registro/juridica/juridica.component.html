@@ -1,0 +1,188 @@
+<h3 class="colorPrincipal mb-3">{{ tituloReg }}</h3>
+<form (keydown.enter)="$event.preventDefault()" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+  <div class="form-group row mb-1">
+    <div class="col-12 col-md-6 ">
+      <label for="nombres">Razón Social:</label>
+      <input type="text" class="form-control" [value]="usuario.nombres" name="nombres" disabled />
+    </div>
+    <div class="col-12 col-md-6 ">
+      <label for="direccion">Domicilio Legal:</label>
+      <input type="text" class="form-control" formControlName="direccionentidad" name="direccion" />
+      <div class="alert-danger"
+        *ngIf="f.direccionentidad.invalid && (f.direccionentidad.dirty || f.direccionentidad.touched)">
+        <div class="container-error-message" *ngIf="f.direccionentidad.errors.required">
+          Direccion es requerido
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row mb-1">
+    <div class="col-12 col-md-4 ">
+      <label for="region">Departamento:</label>
+      <select class="form-control" formControlName="region" (change)="onSelectUbigeo($event.target.value, 'prov')"
+        name="region">
+        <option disabled selected value> Seleccionar</option>
+        <option [value]="region.idUbigeo" *ngFor="let region of regiones">{{ region.nombre }}</option>
+      </select>
+      <div class="pt-1">
+        <div class="alert-danger container-error-message" *ngIf="isSubmitted && !form.get('region').value">
+          Departamento es necesario
+        </div>
+        <div class="alert-danger" *ngIf="f.region.invalid && (f.region.dirty || f.region.touched)">
+          <div class="container-error-message" *ngIf="f.region.errors.required">
+            Departamento es necesario
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12 col-md-4 ">
+      <label for="provincia">Provincia:</label>
+      <select class="form-control" formControlName="provincia" (change)="onSelectUbigeo($event.target.value, 'dist')"
+        name="provincia">
+        <option disabled selected value> Seleccionar</option>
+        <option [value]="provincia.idUbigeo" *ngFor="let provincia of provincias">{{ provincia.nombre }}
+        </option>
+      </select>
+      <div class="pt-1" *ngIf="nacional">
+        <div class="alert-danger container-error-message" *ngIf="isSubmitted && !form.get('provincia').value">
+          La Provincia es necesaria
+        </div>
+        <div class="alert-danger" *ngIf="f.provincia.invalid && (f.provincia.dirty || f.provincia.touched)">
+          <div class="container-error-message" *ngIf="f.region.errors.required">
+            La Provincia es necesaria
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 ">
+      <label for="provincia">Distrito:</label>
+      <select class="form-control" formControlName="distrito" name="distrito">
+        <option disabled selected value>Seleccionar </option>
+        <option [value]="distrito.idUbigeo" *ngFor="let distrito of distritos">{{ distrito.nombre }}</option>
+      </select>
+      <div class="pt-1" *ngIf="nacional">
+        <div class="alert-danger container-error-message" *ngIf="isSubmitted && !form.get('distrito').value">
+          El Distrito es necesario
+        </div>
+        <div class="alert-danger" *ngIf="f.distrito.invalid && (f.distrito.dirty || f.distrito.touched)">
+          <div class="container-error-message" *ngIf="f.distrito.errors.required">
+            El Distrito es necesario
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row mb-1">
+    <div class="col-12 col-md-8 ">
+      <label for="correo">Correo Electrónico:</label>
+      <input type="email" class="form-control" formControlName="correo" name="correo" />
+      <div class="pt-1">
+
+        <div class="alert-danger container-error-message pr-4" *ngIf="isSubmitted && f.correo.invalid">
+          Correo es requerido
+        </div>
+
+        <div class="alert-danger " *ngIf="f.correo.invalid && (f.correo.dirty || f.correo.touched)">
+          <div class="container-error-message" *ngIf="f.correo.errors.required">
+            Correo es requerido
+          </div>
+          <div class="container-error-message" *ngIf="f.correo.errors.minlength">
+            El correo deberia tener 5 caracteres.
+          </div>
+          <div class="container-error-message" *ngIf="
+                                (f.correo.dirty || f.correo.touched) &&
+                                f.correo.invalid &&
+                                f.correo.errors.pattern
+                              ">
+            El valor del correo es invalido.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <label for="celular">Telefono Movil:</label>
+      <input type="text" class="form-control" (keypress)="numberOnly($event)" maxlength="9" formControlName="celular"
+        name="telefono1" />
+      <div class="pt-1">
+        <div class="alert-danger container-error-message" *ngIf="isSubmitted && f.celular.invalid">
+          Nro de Celular es requerido
+        </div>
+        <div class="alert-danger" *ngIf="
+                      f.celular.invalid && (f.celular.dirty || f.celular.touched)
+                    ">
+          <div class="container-error-message" *ngIf="f.celular.errors.required">
+            Nro de Celular es requerido
+          </div>
+          <div class="container-error-message" *ngIf="f.celular.errors.minlength">
+            El Nro de Celular deberia tener 9 numeros.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row mb-1">
+    <div class="col">
+      <label for="numPartidaElectronica">Número de Partida Electronica:</label>
+      <input type="text" class="form-control" formControlName="numPartidaElectronica" name="numPartidaElectronica" />
+    </div>
+
+  </div>
+  <div class="form-group row mb-1">
+    <div class="col">
+      <label for="numAsientoRegistral">Número de Asiento Registral:</label>
+      <input type="text" class="form-control" formControlName="numAsientoRegistral" name="numAsientoRegistral" />
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <div class="col-12 col-md-6 mb-3">
+      <label for="celular">Ingresar Contraseña:</label>
+      <input type="password" formControlName="password" class="form-control" name="contracena" />
+      <div class="pt-1">
+        <div *ngIf="
+              (f.password.touched && f.password.invalid) ||
+              (isSubmitted && f.password.invalid)
+            " class="alert-danger">
+          <div *ngIf="f.password.errors.required">
+            Password es requerido.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <label for="celular">Ingresar Contraseña:</label>
+      <input type="password" formControlName="confirm_password" class="form-control" name="contrasena2" />
+      <div class="pt-2">
+        <div *ngIf="
+              (f.confirm_password.touched && f.confirm_password.invalid) ||
+              (isSubmitted && f.confirm_password.invalid)
+            " class="alert-danger">
+          <div *ngIf="f.confirm_password.errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="f.confirm_password.errors.confirmedValidator">
+            Las contraseñas deben ser iguales.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-12 col-sm-2">
+      <button class="form-control btn btn-primary" role="button">
+        Guardar
+      </button>
+    </div>
+    <div class="col-12 col-sm-2">
+      <button class="form-control btn btn-primary" [routerLink]="['/login']" role="button">
+        Regresar
+      </button>
+    </div>
+  </div>
+</form>

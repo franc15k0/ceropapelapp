@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+  <div class="columna col-10 ">
+    <div class="widget nueva_entrada">
+
+      <div class="cuerpo p-4 mb-4">
+        <!-- Contenidos -->
+        <div class="container pt-2">
+          <hr class="mt-2">
+          <img width="270px" class="d-block mx-auto mb-4" src="assets/images/logo_minam.jpg" />
+          <h3 class="colorPrincipal">{{ tituloBusq }}</h3>
+          <form (keydown.enter)="$event.preventDefault()" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group row">
+              <div class="col-12 col-md-5">
+                <label for="tipodoc"> Tipo de Documento</label>
+                <select class="form-control" (change)="onSelectTipDoc($event.target.value)" name="tipodoc">
+                  <option [value]="tipo.value" *ngFor="let tipo of tipoDocumentos">{{ tipo.viewValue }}</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-5">
+                <label for="nrodocumento">Número de Documento</label>
+                <input type="text" (keypress)="numberOnly($event)" class="form-control"
+                  (keyup.enter)="buscarDocumento($event)" (keypress)="numberOnly($event)" [attr.maxlength]="largo"
+                  formControlName="nrodocumento" name="nrodocumento" id="nrodocumento" />
+                <div class="alert-danger container-error-message pr-4" *ngIf="isSubmitted && f.nrodocumento.invalid">
+                  Por favor ingresar el número del documento
+                </div>
+
+
+              </div>
+              <div class="col-12 col-md-2 mt-2">
+                <button class="form-control btn btn-primary  mr-sm-5 mt-4" role="button" type="button"
+                  (click)="buscarDocumento($event)">
+                  Buscar
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <div *ngIf="usuario.idTipoDocumento === '01'">
+            <app-natural [usuario]="usuario"></app-natural>
+          </div>
+          <div *ngIf="usuario.idTipoDocumento === '06'">
+            <app-juridica [usuario]="usuario"></app-juridica>
+          </div>
+          <div *ngIf="!usuario.idTipoDocumento">
+            <div class="form-group row">
+              <div class="col-12 col-md-2">
+                <button class="form-control btn btn-primary" [routerLink]="['/login']" role="button">
+                  Regresar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

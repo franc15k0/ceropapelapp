@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+
+
+
+      <app-cabecera></app-cabecera>
+      <div class="cuerpo p-2">
+        <div class="container pt-2">
+          <h3 class="colorPrincipal text-center">{{ tituloNuevoReg }}</h3>
+          <app-informacion-basica [usuario]="usuario">
+          </app-informacion-basica>
+          <hr class="mt-1">
+          <h4 class="colorPrincipal">{{ tituloRegistro }}</h4>
+          <div class="form-group row">
+            <div class="col-md-8">
+              <label for="nombres">Descripción</label>
+              <div *ngIf="expediente.registro">
+                <textarea class="form-control" id="txtDescripcionTramite" rows="2"
+                  [value]="expediente.registro.txtDescripcionTramite" disabled>
+                </textarea>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label for="nombres">Organo</label>
+
+                <input type="text" class="form-control"
+                name="descOrgano" [value]="expediente.registro.desOrganoDocumento" disabled/>
+
+            </div>
+          </div>
+
+
+          <div class="table-responsive">
+
+            <h5 class="colorPrincipal">Lista de Documentos</h5>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th>Tipo de Documento</th>
+                  <th>Tipo de Archivo</th>
+                  <th>Número</th>
+                  <th>Archivo</th>
+                  <th>Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let archivo of expediente.archivos; let indice = index">
+                  <td>{{ indice + 1 }}</td>
+                  <td>{{ archivo.descTipoDocumento }}</td>
+                  <td>{{ archivo.descTipoSustento }}</td>
+                  <td>{{ archivo.txtNumeroArchivo }}</td>
+                  <td>{{ archivo.nombreArchivo }}
+                    <fa-icon *ngIf="archivo.flgEstaFirmado == '1'" [icon]="faCheckSquare" class="ml-2 text-info">
+                    </fa-icon>
+                  </td>
+                  <td>
+                    <a [attr.href]="ruta_api + archivo.txtNombreArchivo" class="btn btn-sm btn-primary">
+
+                      <fa-icon [icon]="faDownload" size="sm"></fa-icon>Descar.
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+          <h4 class="colorPrincipal">{{ tituloFirma }}</h4>
+          <div *ngIf="expediente.registro" class="form-group row">
+            <div class="custom-control custom-checkbox ml-4">
+              <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]="terminos"
+                name="example2" disabled />
+              <label class="custom-control-label" for="customCheck2">
+                Yo he leido y estoy de
+                acuerdo
+                con
+                los términos de informacion
+                consignado
+              </label>
+            </div>
+          </div>
+          <div class="form-group row float-right">
+            <div class="col ml-2">
+              <button type="button" [routerLink]="['/bandejaElectronica']" class="btn btn-outline-danger">
+                Cancelar
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

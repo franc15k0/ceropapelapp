@@ -1,0 +1,110 @@
+<div *ngIf="authService.isAuthenticated() && !authService.hasTipoLDAP()" class="container-fluid col-12">
+  <app-cabecera></app-cabecera>
+  <div class="cuerpo mt-3 p-2 mb-4">
+    <div class="container pt-3 pb-2">
+      <h3 class="colorPrincipal">Filtrar documentos</h3>
+
+      <form class="form-inline ">
+        <div class="form-group mb-2 col-auto pl-0">
+          <input type="text" name="filterRegistro" class="form-control" placeholder="Número de Registro..."
+            [(ngModel)]="filterRegistro" />
+        </div>
+
+        <div class="form-group mb-2 col-sm-12 col-auto  pl-0">
+          <input type="text" name="filterExpediente" class="form-control" placeholder="Número de Expediente..."
+            [(ngModel)]="filterExpediente" />
+        </div>
+
+        <div class="input-group mb-2 col-auto pl-0">
+          <select class="form-control " [(ngModel)]="registropara.codEestaTrami" name="tipoDocumento">
+            <option [value]="estado.codElementoTabla" *ngFor="let estado of tipoEstado">
+              {{ estado.txtDescripcionCorta }}</option>
+          </select>
+          <div class="input-group-append pl-0">
+            <button class="btn btn-outline-secondary" (click)="buscarPorEstado()" style="font-size: 14px;"
+              type="button">
+              Buscar
+            </button>
+          </div>
+        </div>
+
+        <div class="input-group col-auto pl-0 pb-2">
+          <input [matDatepicker]="miDatepicker" class="form-control" [(ngModel)]="registropara.fecRegistroDesde"
+            name="fecRegistroDesde" style="display: inline; width: 155px;" placeholder="Desde" />
+          <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #miDatepicker></mat-datepicker>
+
+          <input [matDatepicker]="miDatepicker2" class="form-control" [(ngModel)]="registropara.fecRegistroHasta"
+            name="fecRegistroHasta" style="display: inline; width: 155px;" placeholder="Hasta" />
+          <mat-datepicker-toggle [for]="miDatepicker2"></mat-datepicker-toggle>
+          <mat-datepicker #miDatepicker2></mat-datepicker>
+        </div>
+      </form>
+
+      <form class="form-inline float-right pr-3">
+        <div class="col-auto pr-3">
+          <button type="button" (click)="buscarPorFechas()" class="form-control btn btn-primary mt-2 form-control-sm ">
+            Buscar por Rangos
+          </button>
+        </div>
+      </form>
+      <br>
+      <br>
+      <form class="form-inline">
+
+        <div class="col-sm-6 p-0">
+          <button type="button" [routerLink]="['/registroExpediente']"
+            class="form-control btn btn-primary mt-2 form-control-sm">
+            Registrar Documento
+          </button>
+
+        </div>
+      </form>
+
+      <hr class="mt-4 mb-4">
+      <h3 class="colorPrincipal">Listado de documentos</h3>
+      <div class="table-responsive">
+
+        <table class="table table-borderless mt-2">
+          <thead>
+            <tr>
+              <th>Nro</th>
+              <th scope="col">Nro. Registro</th>
+              <th scope="col">Nro. Expediente</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Fecha de Registro</th>
+              <th scope="col">Estado Tramite</th>
+              <th scope="col">Accion</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="listRegistros">
+            <tr *ngFor="
+              let registro of listRegistros
+                | filter: filterRegistro
+                | paginate: config;
+              let i = index
+            ">
+              <td scope="row">{{ i + 1 }}</td>
+              <td>{{ registro.idRegistro }}</td>
+              <td>{{ registro.idExpediente }}</td>
+              <td>{{ registro.txtDescripcionTramite }}</td>
+              <td>{{ registro.fecRegistroTramite }}</td>
+              <td>{{ registro.descEestaTrami }}</td>
+              <td>
+                <a href="javascript: void(0);" (click)="irRegistro(registro.idRegistro, registro.codEestaTrami)">
+                  Ver
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)" class="float-right"></pagination-controls>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>

@@ -1,0 +1,68 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.table-condensed {
+  font-size: 14px;
+}
+
+.sinpadding [class*="col-"] {
+  padding: 0;
+}
+
+.colorPrincipal {
+  color: #005286;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Varela Round', sans-serif;
+
+}
+
+.btn-primary {
+  background-color: #005286;
+  border: none;
+}
+
+.principal {
+  line-height: 45px;
+  font-weight: 900;
+  font-size: 50px;
+}
+
+table thead th {
+  font-family: 'Varela Round', sans-serif;
+}
+
+.cuerpo {
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+table thead th tr {
+  vertical-align: middle;
+}
+
+th,
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table>tbody>tr>td {
+  vertical-align: middle;
+  padding: 3px;
+}
+
+.cuerpo {
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+table>thead>tr>th {
+  font-size: 15px;
+  background: #005286;
+  color: #fff;
+  font-family: 'Varela Round', sans-serif;
+  padding: 5px;
+
+}
