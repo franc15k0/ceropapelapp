@@ -7,6 +7,7 @@ module.exports = function (grunt) {
       deploy: {
         options: { stdout: true },
         command: ["rm -rf dist", "ng build --base-href . --prod"].join("&&"),
+        /* command: ["rd /S /Q dist", "ng build --base-href . --prod"].join("&&"), */
       },
     },
 
