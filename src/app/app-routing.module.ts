@@ -37,5 +37,7 @@ const routes: Routes = [
   /*Rutas con JBOSS*/
   imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
+
+
 })
 export class AppRoutingModule { }
