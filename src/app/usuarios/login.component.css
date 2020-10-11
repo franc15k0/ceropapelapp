@@ -33,7 +33,7 @@
   display: flex;
   -ms-flex-align: center;
   width: 100%;
-  background-image: url("/ceropapelapp/assets/images/fondo.png");
+  background-image: url("~src/assets/images/fondo.png");
   background-position: 60% top;
   background-color: #0097d7;
   height: 200%;
