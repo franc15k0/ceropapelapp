@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Usuario } from '../../model/usuario.model';
+import { Menu } from '../../model/menu.model';
 import { environment } from 'src/environments/environment';
 import { AppConstants } from 'src/app/app.constants';
 @Injectable({
@@ -9,6 +10,7 @@ import { AppConstants } from 'src/app/app.constants';
 })
 export class AuthService {
   private environmentUrlCeroPapel = environment.apiUrlCeroPapel;
+  p
   private _usuario: Usuario;
   private _token: string;
   constructor(private http: HttpClient) { }
@@ -102,6 +104,11 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+  getMenu(idUsuario): Observable<Menu[]> {
+    return this.http.get<Menu[]>(
+      `${this.environmentUrlCeroPapel}/usuario/menu/${idUsuario}`
+    );
   }
   logout(): void {
     this._token = null;

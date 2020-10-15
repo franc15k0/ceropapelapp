@@ -40,6 +40,7 @@ import { CabeceraComponent } from './shared/cabecera/cabecera.component';
 import { RepresentanteLegalComponent } from './expediente/representante-legal/representante-legal.component';
 import { RegistroRepresentanteComponent } from './expediente/representante-legal/registro-representante/registro-representante.component';
 import { RecuperaComponent } from './usuarios/recupera/recupera.component';
+import { MenuComponent } from './usuarios/menu/menu.component';
 registerLocaleData(localeES, 'es');
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ registerLocaleData(localeES, 'es');
     RepresentanteLegalComponent,
     RegistroRepresentanteComponent,
     RecuperaComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +88,7 @@ registerLocaleData(localeES, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SphttpInterceptor, multi: true },
+  /*   { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }, */
   ],
   bootstrap: [AppComponent],
 })

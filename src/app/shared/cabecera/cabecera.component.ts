@@ -42,11 +42,12 @@ export class CabeceraComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/login']);
     swal.fire(
       'Logout',
       `${this.usuario.nombres}, has cerrado sesión con éxito!`,
       'success'
     );
-    this.router.navigate(['/login']);
+
   }
 }

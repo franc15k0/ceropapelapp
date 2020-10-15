@@ -1,28 +1,8 @@
 <div class="container-fluid">
 
   <div class="row">
-    <div *ngIf="authService.isAuthenticated()" class="barra-lateral col-12 col-sm-auto">
-      <div class="logo">
-        <h2>Trámite Cero Papel</h2>
-      </div>
-      <nav class="menu d-flex d-sm-block justify-content-center flex-wrap ">
-        <a *ngIf="!authService.hasTipoLDAP()" [routerLink]="['/bandejaElectronica']">
-          <fa-icon [icon]="faArchive" size="sm"> </fa-icon><span>Bandeja Electrónica</span>
-        </a>
-        <a *ngIf="!authService.hasTipoLDAP()" [routerLink]="['/registroExpediente']">
-          <fa-icon [icon]="faEdit" size="sm"></fa-icon><span>Registro de documentos</span>
-        </a>
-
-        <a *ngIf="!authService.hasTipoLDAP()" [routerLink]="['/casillaElectronica']">
-          <fa-icon [icon]="faBoxOpen" size="sm"></fa-icon><span>Casilla Electrónica</span>
-        </a>
-        <a *ngIf="!authService.hasTipoLDAP() && authService.hasRUC()" [routerLink]="['/perfil']">
-          <fa-icon [icon]="faAddressBook" size="sm"></fa-icon><span>Perfil</span>
-        </a>
-        <a *ngIf="authService.hasTipoLDAP()" [routerLink]="['/reporte']">
-          <fa-icon [icon]="faFilePdf" size="sm"></fa-icon><span>Reporte</span>
-        </a>
-      </nav>
+    <div *ngIf="authService.isAuthenticated()" >
+      <app-menu ></app-menu>
     </div>
 
     <main class="main col pt-0 pl-0">
