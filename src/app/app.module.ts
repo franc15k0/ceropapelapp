@@ -41,6 +41,7 @@ import { RepresentanteLegalComponent } from './expediente/representante-legal/re
 import { RegistroRepresentanteComponent } from './expediente/representante-legal/registro-representante/registro-representante.component';
 import { RecuperaComponent } from './usuarios/recupera/recupera.component';
 import { MenuComponent } from './usuarios/menu/menu.component';
+import { CacheInterceptor } from './usuarios/interceptors/cache.interceptor';
 registerLocaleData(localeES, 'es');
 @NgModule({
   declarations: [
@@ -88,7 +89,7 @@ registerLocaleData(localeES, 'es');
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: SphttpInterceptor, multi: true },
-  /*   { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }, */
+    /* { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }, */
   ],
   bootstrap: [AppComponent],
 })
