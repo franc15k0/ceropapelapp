@@ -12,6 +12,7 @@ import { Usuario } from '../../../model/usuario.model';
 import swal from 'sweetalert2';
 import { Ciudadano } from 'src/app/model/ciudadano.model';
 import { AuthService } from '../../../usuarios/service/auth.service';
+import { Sesion } from 'src/app/model/sesion.model';
 @Component({
   selector: 'app-registro-representante',
   templateUrl: './registro-representante.component.html',
@@ -81,6 +82,9 @@ export class RegistroRepresentanteComponent implements OnInit {
                 this.ciudadano.idUsuario = '' + this.usuario.idUsuario;
                 this.ciudadano.idCiudadanoEmpresa = this.usuario.idCiudadano;
                 this.ciudadano.idNatural = ciudadano.idNatural;
+                const sesion = new Sesion();
+                sesion.linkAplicativo = window.location.origin;
+                this.ciudadano.sesion= sesion;
                 this.registroExpedienteService.asignarRepresentanteLegal(this.ciudadano).subscribe(
                   (usuario) => {
                     swal.fire(
@@ -163,6 +167,9 @@ export class RegistroRepresentanteComponent implements OnInit {
       this.ciudadano.fecNacimiento = this.form.controls['fechaNacimiento'].value;
       this.ciudadano.idCiudadanoEmpresa = this.usuario.idCiudadano;
       this.ciudadano.idUsuario = this.usuario.idUsuario.toString();
+      const sesion = new Sesion();
+      sesion.linkAplicativo = window.location.origin;
+      this.ciudadano.sesion= sesion;
       swal
         .fire({
           title: '¿Está seguro de guardar la información ingresada?  (SI/NO)',

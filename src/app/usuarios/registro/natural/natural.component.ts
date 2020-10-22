@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { RegistroService } from '../../service/registro.service';
 import { ConfirmedValidator } from './../confirmed.validator';
 import swal from 'sweetalert2';
+import { Sesion } from 'src/app/model/sesion.model';
 @Component({
   selector: 'app-natural',
   templateUrl: './natural.component.html',
@@ -64,6 +65,9 @@ export class NaturalComponent implements OnInit {
       this.usuario.telefono1 = this.form.controls['celular'].value;
       this.usuario.flgSexo = this.form.controls['sexo'].value;
       this.usuario.fecNacimiento = this.form.controls['fechaNacimiento'].value;
+      const sesion = new Sesion();
+      sesion.linkAplicativo = window.location.origin;
+      this.usuario.sesion= sesion;
       swal
         .fire({
           title: '¿Está seguro de guardar la información ingresada?  (SI/NO)',

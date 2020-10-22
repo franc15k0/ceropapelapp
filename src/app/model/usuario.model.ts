@@ -1,3 +1,4 @@
+import { Sesion } from './sesion.model';
 import { Valido } from './valido.model';
 
 export class Usuario {
@@ -33,4 +34,5 @@ export class Usuario {
   numPartidaElectronica: string;
   idTipoDocumento: string;
   valido: Valido;
+  sesion: Sesion;
 }

@@ -28,6 +28,7 @@ import { environment } from 'src/environments/environment';
 import { Obligatorios } from 'src/app/model/obligatorios';
 import { ClienteEdoc } from 'src/app/model/cliente-edoc.model';
 import { Ciudadano } from 'src/app/model/ciudadano.model';
+import { Sesion } from 'src/app/model/sesion.model';
 @Component({
   selector: 'app-nuevo-registro',
   templateUrl: './nuevo-registro.component.html',
@@ -399,6 +400,9 @@ export class NuevoRegistroComponent implements OnInit {
     ].value;
     this.expediente.documento = documento;
     this.expediente.usuario = this.usuario;
+    const sesion = new Sesion();
+    sesion.linkAplicativo = window.location.origin;
+    this.expediente.sesion = sesion;
     console.log(this.expediente);
     this.registroExpedienteService.guardarExpe(this.expediente).subscribe(
       (b) => {

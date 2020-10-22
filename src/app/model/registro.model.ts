@@ -6,7 +6,6 @@ export class Registro {
   codEestaTrami: string;
   descEestaTrami: string;
   fecRegistroTramite: string;
-  /* flgFirmoDigitalmente: string; */
   desOrganoDocumento: string;
   codEorgano: string;
   flgDeclaracionJurada: string;

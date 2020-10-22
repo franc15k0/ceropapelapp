@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { ConfirmedValidator } from '../confirmed.validator';
 import { AppConstants } from 'src/app/app.constants';
+import { Sesion } from 'src/app/model/sesion.model';
 
 @Component({
   selector: 'app-juridica',
@@ -100,7 +101,9 @@ export class JuridicaComponent implements OnInit {
       this.usuario.telefono1 = this.form.controls['celular'].value;
       this.usuario.numAsientoRegistral = this.form.controls['numAsientoRegistral'].value;
       this.usuario.numPartidaElectronica = this.form.controls['numPartidaElectronica'].value;
-
+      const sesion = new Sesion();
+      sesion.linkAplicativo = window.location.origin;
+      this.usuario.sesion= sesion;
       if (this.nacional) {
         this.usuario.ubigeo = this.form.controls['distrito'].value;
       } else {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { BandejaService } from '../service/bandeja.service';
 import { AuthService } from '../usuarios/service/auth.service';
 import { Usuario } from '../model/usuario.model';
@@ -8,6 +8,7 @@ import swal from 'sweetalert2';
 import { DetalleCompendio } from '../model/detalle-compendio';
 import { RegistroExpedienteService } from '../expediente/nuevo-registro/registro-expediente.service';
 import { AppConstants } from '../app.constants';
+
 @Component({
   selector: 'app-bandeja',
   templateUrl: './bandeja.component.html',
@@ -27,9 +28,11 @@ export class BandejaComponent implements OnInit {
     private bandejaService: BandejaService,
     private registroExpedienteService: RegistroExpedienteService,
     public authService: AuthService
+
   ) { }
 
   ngOnInit(): void {
+    console.log(".............."+window.location.origin);
     this.registropara.codEestaTrami = "";
     this.usuario = this.authService.usuario;
     this.registroExpedienteService

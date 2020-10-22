@@ -1,3 +1,5 @@
+import { Sesion } from './sesion.model';
+
 export class Notificacion {
   idExpediente: string;
   idRegistro: string;
@@ -13,4 +15,5 @@ export class Notificacion {
   idUsuario: string;
   nombreDocumento: string;
   numeroCeroPapel: string;
+  sesion: Sesion;
 }

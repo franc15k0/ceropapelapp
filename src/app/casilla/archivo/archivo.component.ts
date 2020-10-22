@@ -7,6 +7,7 @@ import { Notificacion } from 'src/app/model/notifiacion.model';
 import { ArchivoNotificacion } from 'src/app/model/archivo-notificacion';
 import { environment } from 'src/environments/environment';
 import { faCloudDownloadAlt } from '@fortawesome/free-solid-svg-icons';
+import { Sesion } from 'src/app/model/sesion.model';
 declare var require: any
 const FileSaver = require('file-saver');
 @Component({
@@ -48,6 +49,9 @@ export class ArchivoComponent implements OnInit {
         const notificacion: Notificacion = new Notificacion();
         notificacion.idExpediente = id;
         notificacion.idCiudadano = this.usuario.idCiudadano.toString();
+        const sesion = new Sesion();
+        sesion.linkAplicativo = window.location.origin;
+        notificacion.sesion = sesion;
         this.casillaService
           .getArchivosNotificacion(notificacion)
           .subscribe((archivos) => {

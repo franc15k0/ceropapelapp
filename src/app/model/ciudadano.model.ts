@@ -1,3 +1,5 @@
+import { Sesion } from './sesion.model';
+
 export class Ciudadano {
     idCiudadano: number;
     numDni: string;
@@ -19,4 +21,5 @@ export class Ciudadano {
     estadoReprese: string;
     fecInicioRep: string;
     fecFinRep: string;
+    sesion: Sesion;
 }
