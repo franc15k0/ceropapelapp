@@ -28,6 +28,7 @@ import { environment } from 'src/environments/environment';
 import { Obligatorios } from 'src/app/model/obligatorios';
 import { ClienteEdoc } from 'src/app/model/cliente-edoc.model';
 import { Ciudadano } from 'src/app/model/ciudadano.model';
+import { Sesion } from 'src/app/model/sesion.model';
 @Component({
   selector: 'app-edicion',
   templateUrl: './edicion.component.html',
@@ -407,7 +408,9 @@ export class EdicionComponent implements OnInit {
     ].value;
     this.expediente.documento = documento;
     this.expediente.usuario = this.usuario;
-    console.log("this.expediente.registro.flgDeclaracionJurada::" + this.expediente.registro.flgDeclaracionJurada);
+    const sesion = new Sesion();
+    sesion.linkAplicativo = window.location.origin;
+    this.expediente.sesion = sesion;
     this.archivosDel.forEach((obj) => {
       this.expediente.archivos.push(obj);
     });
