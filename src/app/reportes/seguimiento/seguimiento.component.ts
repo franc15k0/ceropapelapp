@@ -52,6 +52,7 @@ export class SeguimientoComponent implements OnInit {
   config: any;
   tipoEstado: DetalleCompendio[];
   reportepara: Reporte = new Reporte();
+  sinTipoSeleccionado = true;
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
   constructor(
     private registroExpedienteService: RegistroExpedienteService,
@@ -86,7 +87,6 @@ export class SeguimientoComponent implements OnInit {
         if (response) {
           this.listReporte = response;
           this.parsePagination();
-          // this.reportepara = new Reporte();
         } else {
           swal.fire('Error', 'No se encontraron registros', 'warning');
         }
@@ -94,6 +94,15 @@ export class SeguimientoComponent implements OnInit {
   }
   pageChanged(event) {
     this.config.currentPage = event;
+  }
+  onSelectDocumento(event: any){
+    console.log(event);
+    if(event===""){
+      this.sinTipoSeleccionado = true;
+      this.reportepara.numDocumentoPersona = "";
+    }else{
+      this.sinTipoSeleccionado = false;
+    }
   }
   excell() {
     let newArray: any[] = [];

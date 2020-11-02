@@ -114,7 +114,15 @@ export class BandejaService {
       const constfecEnviaHast = new Date(para.fecEnviaHast);
       para.fecEnviaHast = moment(constfecEnviaHast).format('YYYYMMDD');
     }
-
+ /*    if(para.codEestaTrami===''){
+        para.codEestaTrami = null;
+    }
+    if(para.codEtipoDocumento===''){
+      para.codEtipoDocumento = null;
+     } */
+     if(para.numDocumentoPersona===''){
+      para.numDocumentoPersona = null;
+     }
     return this.http
       .put<Reporte[]>(this.environmentUrl + '/api/expediente/reporte', para)
       .pipe(

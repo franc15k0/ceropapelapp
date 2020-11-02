@@ -12,7 +12,7 @@
             <div class="form-row">
               <div class="form-group col-md-3">
                 <label for="inputState">Tipo de documento</label>
-                <select class="form-control" [(ngModel)]="reportepara.codEtipoDocumento" name="codEtipoDocumento">
+                <select class="form-control" [(ngModel)]="reportepara.codEtipoDocumento" name="codEtipoDocumento" (change)="onSelectDocumento($event.target.value)">
                   <option selected value="">Seleccionar</option>
                   <option [value]="tipo.value" *ngFor="let tipo of tipoDocumentos">{{ tipo.viewValue }}</option>
                 </select>
@@ -20,7 +20,7 @@
               <div class="form-group col-md-3">
                 <label for="inputCity">Número de documento</label>
                 <input type="text" name="numDocumentoPersona" class="form-control" placeholder="Número de Documento..."
-                  [(ngModel)]="reportepara.numDocumentoPersona" />
+                  [(ngModel)]="reportepara.numDocumentoPersona"  [disabled]="sinTipoSeleccionado"/>
               </div>
               <div class="form-group col-md-3">
                 <label for="filterExpediente">Número de Expediente</label>

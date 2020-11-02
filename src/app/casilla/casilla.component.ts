@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Notificacion } from '../model/notifiacion.model';
 import { AppConstants } from '../app.constants';
 import swal from 'sweetalert2';
+import { Sesion } from '../model/sesion.model';
 @Component({
   selector: 'app-casilla',
   templateUrl: './casilla.component.html',
@@ -28,6 +29,9 @@ export class CasillaComponent implements OnInit {
     const notifiacion: Notificacion = new Notificacion();
     notifiacion.idCiudadano = '' + this.usuario.idCiudadano;
     notifiacion.idUsuario = '' + this.usuario.idUsuario;
+    const sesion = new Sesion();
+    sesion.linkAplicativo = window.location.origin;
+    notifiacion.sesion = sesion;
     this.casillaService.getNotificacion(notifiacion).subscribe((response) => {
       this.listNotificacion = response;
       this.parsePagination();
