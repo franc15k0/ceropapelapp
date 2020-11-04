@@ -99,10 +99,10 @@ export class RegistroService {
       `${this.environmentUrl}/usuario/ubigeo/${padre}`
     );
   }
-  recuperaContrasena(numeroDocumento, linkApp): Observable<string> {
+  recuperaContrasena(numeroDocumento): Observable<string> {
 
     return this.http
-      .get(`${this.environmentUrl}/usuario/recuperar/${numeroDocumento}/${linkApp}`, { responseType: 'text' })
+      .get(`${this.environmentUrl}/usuario/recuperar/${numeroDocumento}`, { responseType: 'text' })
       .pipe(
         catchError((e) => {
           if (e.status == 400) {

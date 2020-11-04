@@ -53,7 +53,7 @@ export class RecuperaComponent implements OnInit {
   enviarInformacionRecuperar($event) {
 
     const numeroDocumento = this.form.controls['nrodocumento'].value;
-    this.registroService.recuperaContrasena(numeroDocumento, window.location.origin).subscribe(
+    this.registroService.recuperaContrasena(numeroDocumento).subscribe(
       (ok) => {
 
         swal.fire(
