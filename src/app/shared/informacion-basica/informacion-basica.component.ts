@@ -15,12 +15,12 @@ export class InformacionBasicaComponent implements OnInit {
 
   ngOnInit(): void {
     this.descripcionDocumento =
-      this.usuario.idTipoDocumento === AppConstants.ID_TIPO_DOCUMENTO_DNI
-        ? AppConstants.DNI
-        : AppConstants.RUC;
+      this.usuario.idTipoDocumento === AppConstants.ID_TIPO_DOCUMENTO_RUC
+        ? AppConstants.RUC
+        : AppConstants.DNI;
     this.nombreRazonSocial =
-      this.usuario.idTipoDocumento === AppConstants.ID_TIPO_DOCUMENTO_DNI
-        ? this.usuario.nombres + ' ' + this.usuario.apellidos
-        : this.usuario.nombres;
+      this.usuario.idTipoDocumento === AppConstants.ID_TIPO_DOCUMENTO_RUC
+        ? this.usuario.nombres
+        : this.usuario.nombres + ' ' + this.usuario.apellidos;
   }
 }

@@ -43,12 +43,12 @@
               <div class="form-group col-md-3">
                 <label for="filterExpediente">Nombres de Persona</label>
                 <input type="text" name="nombres" class="form-control" placeholder="Nombres de Persona"
-                  [(ngModel)]="reportepara.nombres" />
+                  [(ngModel)]="reportepara.nombres" oninput="this.value = this.value.toUpperCase()"/>
               </div>
               <div class="form-group col-md-3">
                 <label for="txtRazonSocial">Razón Social</label>
                 <input type="text" name="txtRazonSocial" class="form-control" placeholder="Razón Social..."
-                  [(ngModel)]="reportepara.txtRazonSocial" />
+                  [(ngModel)]="reportepara.txtRazonSocial" oninput="this.value = this.value.toUpperCase()"/>
               </div>
               <div class="form-group col-md-5">
                 <form class="form-inline">

@@ -98,21 +98,38 @@ export class BandejaService {
     );
   }
   getReportePara(para: Reporte): Observable<Reporte[]> {
+    console.log(para.fecRegistroDesd);
+    console.log(para.fecRegistroHast);
+    console.log(para.fecEnviaDesd);
+    console.log(para.fecEnviaHast);
     if (para.fecRegistroDesd) {
-      const constFecRegistroDesde = new Date(para.fecRegistroDesd);
-      para.fecRegistroDesd = moment(constFecRegistroDesde).format('YYYYMMDD');
+
+      if (typeof para.fecRegistroDesd !== 'string') {
+        const constFecRegistroDesde = new Date(para.fecRegistroDesd);
+        para.fecRegistroDesd = moment(constFecRegistroDesde).format('YYYYMMDD');
+      }
+
     }
-    if (para.fecRegistroDesd) {
-      const constfecRegistroHasta = new Date(para.fecRegistroHast);
-      para.fecRegistroHast = moment(constfecRegistroHasta).format('YYYYMMDD');
+    if (para.fecRegistroHast) {
+      if (typeof para.fecRegistroHast !== 'string') {
+        const constfecRegistroHasta = new Date(para.fecRegistroHast);
+        para.fecRegistroHast = moment(constfecRegistroHasta).format('YYYYMMDD');
+      }
+
     }
     if (para.fecEnviaDesd) {
-      const constfecEnviaDesd = new Date(para.fecEnviaDesd);
-      para.fecEnviaDesd = moment(constfecEnviaDesd).format('YYYYMMDD');
+      if (typeof para.fecEnviaDesd !== 'string') {
+        const constfecEnviaDesd = new Date(para.fecEnviaDesd);
+        para.fecEnviaDesd = moment(constfecEnviaDesd).format('YYYYMMDD');
+      }
+
     }
     if (para.fecEnviaHast) {
-      const constfecEnviaHast = new Date(para.fecEnviaHast);
-      para.fecEnviaHast = moment(constfecEnviaHast).format('YYYYMMDD');
+      if (typeof para.fecEnviaHast !== 'string') {
+        const constfecEnviaHast = new Date(para.fecEnviaHast);
+        para.fecEnviaHast = moment(constfecEnviaHast).format('YYYYMMDD');
+      }
+
     }
  /*    if(para.codEestaTrami===''){
         para.codEestaTrami = null;

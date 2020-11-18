@@ -58,16 +58,16 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/bandejaElectronica']);
         }
 
-        if (usuario.idTipoDocumento === AppConstants.ID_TIPO_DOCUMENTO_DNI) {
+        if (usuario.idTipoDocumento === AppConstants.ID_TIPO_DOCUMENTO_RUC) {
           swal.fire(
             'Login',
-            `Sr(a). ${usuario.apellidos}, Bienvenido al Sistema de Trámite Cero Papel`,
+            `Sr. ${usuario.nombres}, Bienvenido al Sistema de Trámite Cero Papel`,
             'success'
           );
         } else {
           swal.fire(
             'Login',
-            `Sr. ${usuario.nombres}, Bienvenido al Sistema de Trámite Cero Papel`,
+            `Sr(a). ${usuario.apellidos}, Bienvenido al Sistema de Trámite Cero Papel`,
             'success'
           );
         }
