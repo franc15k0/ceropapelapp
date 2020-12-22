@@ -1,0 +1,15 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div *ngIf="authService.isAuthenticated()" >
+      <app-menu ></app-menu>
+    </div>
+
+    <main class="main col pt-0 pl-0">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white;">Cargando...</p>
+</ngx-spinner>

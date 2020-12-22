@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <h6 class="modal-title centered">{{ title }}</h6>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="salirModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" style="height: 420px;">
+
+  <div class="invokerScreen">
+    <iframe #iframe id="iframe" style="height:100%;width:100%; border:none;" [src]="urlSafe"></iframe>
+  </div>
+
+</div>

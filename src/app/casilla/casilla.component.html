@@ -1,0 +1,121 @@
+<div *ngIf="authService.isAuthenticated() && !authService.hasTipoLDAP()" class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+
+
+
+      <app-cabecera></app-cabecera>
+      <div class="cuerpo mt-3 p-2 mb-4">
+        <div class="container pt-3 pb-2">
+          <h3 class="colorPrincipal">Filtro de Notificaciones</h3>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputState">Número de Expediente</label>
+                <input type="text" name="filterExpediente" class="form-control" placeholder="Número de Expediente..."
+                  [(ngModel)]="notificacionpara.numeroExpediente" />
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputState">Numero de Tramite</label>
+                <input type="text" name="filterRegistro" class="form-control" placeholder="Número de Tramite..."
+                  [(ngModel)]="notificacionpara.numeroCeroPapel" />
+              </div>
+
+              <div class="form-group col-md-5">
+                <label for="inputState">Fecha Envió</label>
+                <form class="form-inline">
+                  <div class="input-group col-auto pl-0 pt-0 pr-0 pb-2">
+                    <input [matDatepicker]="miDatepicker" class="form-control"
+                      [(ngModel)]="notificacionpara.fecSalidaDesde" name="fecRegistroDesde"
+                      style="display: inline; width: 155px;" placeholder="Desde" />
+                    <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #miDatepicker></mat-datepicker>
+
+                    <input [matDatepicker]="miDatepicker2" class="form-control"
+                      [(ngModel)]="notificacionpara.fecSalidaHasta" name="fecRegistroHasta"
+                      style="display: inline; width: 155px;" placeholder="Hasta" />
+                    <mat-datepicker-toggle [for]="miDatepicker2"></mat-datepicker-toggle>
+                    <mat-datepicker #miDatepicker2></mat-datepicker>
+
+                  </div>
+                </form>
+              </div>
+              <div class="form-group col-md-1 pt-4">
+                <button type="button" (click)="buscar()" class="form-control btn btn-primary mt-2 form-control-sm  ">
+                  Buscar
+                </button>
+              </div>
+            </div>
+          </form>
+          <form class="form-inline pl-5 float-right">
+            <div class="col-sm-6 p-0">
+
+            </div>
+          </form>
+          <hr class="mt-4 mb-4">
+          <form class="form-inline">
+
+            <div class="col-sm-6 p-0">
+              <button type="button" [routerLink]="['/registroExpediente']"
+                class="form-control btn btn-primary mt-2 form-control-sm">
+                Registrar Documento
+              </button>
+            </div>
+
+          </form>
+          <h3 class="colorPrincipal  pl-0 pt-3">Listado de documentos</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered mt-2">
+              <thead>
+                <tr>
+                  <th>N</th>
+                  <th scope="col">Expediente</th>
+                  <th scope="col">N° Trámite</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Fecha Envió</th>
+                  <th scope="col">Archivos</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="listNotificacion">
+                <tr *ngFor="
+              let notifiacion of listNotificacion
+                | paginate: config;
+              let i = index
+            ">
+                  <td *ngIf="config.currentPage==1">{{  i + 1 }}</td>
+                  <td *ngIf="config.currentPage>1">{{((config.currentPage-1)*config.itemsPerPage)+(i+1)}}
+                  </td>
+                  <td>{{ notifiacion.numeroExpediente }}</td>
+                  <td>{{ notifiacion.numeroCeroPapel }}</td>
+                  <td>{{ notifiacion.descripcion }}</td>
+                  <td>{{ notifiacion.estadoNotificacion }}</td>
+                  <td>{{ notifiacion.fechaSalida }} </td>
+                  <td>
+                    <a href="javascript: void(0);" (click)="irArchivo(notifiacion)">
+                      Ver
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <pagination-controls (pageChange)="pageChanged($event)" class="float-right"></pagination-controls>
+          </div>
+
+          <div class="form-row float-right">
+            <div class="col-auto">
+              <button type="button" [routerLink]="['/bandejaElectronica']" class="btn btn-outline-danger">
+                Cancelar
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

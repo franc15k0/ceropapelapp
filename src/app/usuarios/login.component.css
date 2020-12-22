@@ -1,0 +1,98 @@
+.wrapper {
+  width: 100%;
+  padding: 0px 0px;
+  margin: 0 auto;
+  height: 100% !important;
+}
+
+.mainBody {
+  padding: 0px 0px;
+  margin: 0px 0px;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  background: #f0f1f8;
+}
+
+.sidebar {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  width: 250px;
+  background-color: #0097d7;
+  height: 100%;
+  color: #ffffff;
+}
+
+.saludo {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  width: 100%;
+  background-image: url("~src/assets/images/fondo.png");
+  background-position: 60% top;
+  background-color: #0097d7;
+  height: 200%;
+  background-repeat: repeat-y;
+  /* background-position: center top; */
+  color: #ffffff;
+}
+
+.textoLogin {
+  font-size: 5vw;
+  color: #2d3165;
+}
+
+.formLogin {
+  display: block;
+  width: 380px;
+  align-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.colorFondo {
+  background: #f0f1f8;
+}
+
+.sidebar2 {
+  background-color: #0097d7;
+  color: #ffffff;
+}
+
+.mainContent {
+  display: flex;
+  -ms-flex: 1;
+  flex: 1;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0px;
+  overflow-y: scroll;
+}
+
+.top {
+  border-bottom: 1px solid #b3b3b3;
+}
+
+.cuerpo {
+  background: #ffffff;
+  border-radius: 15px;
+}
+
+.principal {
+  line-height: 45px;
+  font-weight: 900px;
+  font-size: 50px;
+  font-family: 'Varela Round', sans-serif;
+}
+
+.btn-primary {
+  background-color: #005286;
+  border: none;
+}

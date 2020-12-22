@@ -1,0 +1,16 @@
+<h4 class="colorPrincipal">{{ titulo }}</h4>
+
+<div class="form-row">
+  <div class="form-group col-md-3">
+    <label for="tipodoc"> Tipo de Documento</label>
+    <input type="text" class="form-control" name="nrodocumento" id="tipodoc" [value]="descripcionDocumento" disabled />
+  </div>
+  <div class="form-group col-md-3">
+    <label for="nrodocumento">Número Documento</label>
+    <input type="text" class="form-control" name="nrodocumento" id="nrodocumento" [value]="usuario.usuario" disabled />
+  </div>
+  <div class="form-group col-md-6">
+    <label for="nombreraz">Nombre / Razón Social</label>
+    <input type="text" class="form-control" name=" nombreraz" id="nombreraz" [value]="nombreRazonSocial" disabled />
+  </div>
+</div>

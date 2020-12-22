@@ -1,0 +1,23 @@
+.table-condensed {
+  font-size: 14px;
+}
+
+.sinpadding [class*="col-"] {
+  padding: 0;
+}
+
+.centered {
+  display: table-cell;
+  height: 20px;
+  width: 600px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.centeredBot {
+  display: table-cell;
+  height: 60px;
+  width: 600px;
+  text-align: center;
+  vertical-align: middle
+}

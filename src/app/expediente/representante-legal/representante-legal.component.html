@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+
+      <app-cabecera></app-cabecera>
+      <div class="cuerpo mt-3 p-0 mb-4">
+        <div class="container pt-3 pb-2">
+          <form class="form-inline">
+            <div class="col-sm-6 p-0">
+              <button type="button" [routerLink]="['/registroRepresentante']"
+                class="form-control btn btn-primary mt-2 form-control-sm">
+                Registrar Nuevo Representante Legal
+              </button>
+
+            </div>
+          </form>
+
+          <hr class="mt-4 mb-1">
+          <h4 class="colorPrincipal">Representante Legal</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered mt-2">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th scope="col">N° DNI</th>
+                  <th scope="col">Nombres</th>
+                  <th scope="col">Docmicilio Legal</th>
+                  <th scope="col">N° Celular</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Fecha Inicio</th>
+                  <th scope="col">Fecha Fin</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="representantes">
+                <tr *ngFor="
+                let representante of representantes; let i = index
+              " [ngClass]="{'bg-danger text-white':representante.estadoReprese === 'ACTIVO'}">
+                  <td scope="row">{{ i + 1 }}</td>
+                  <td>{{ representante.numDni }}</td>
+                  <td>{{ representante.nombresCompleto }}</td>
+                  <td>{{ representante.txtDireccion }}</td>
+                  <td>{{ representante.numTelefonoCelular }}</td>
+                  <td>{{ representante.txtCorreoElectronico }}</td>
+                  <td>{{ representante.estadoReprese }}</td>
+                  <td>{{ representante.fecInicioRep }}</td>
+                  <td>{{ representante.fecFinRep }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>

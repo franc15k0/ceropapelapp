@@ -1,0 +1,123 @@
+<div *ngIf="authService.isAuthenticated() && !authService.hasTipoLDAP()" class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+
+      <app-cabecera></app-cabecera>
+
+
+
+
+      <div class="cuerpo mt-3 p-0 mb-4">
+        <div class="container pt-3 pb-2">
+          <h3 class="colorPrincipal">Filtrar documentos</h3>
+
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputState">Número de Tramite</label>
+                <input type="text" name="filterRegistro" class="form-control" placeholder="Número de Tramite..."
+                  [(ngModel)]="registropara.numeroCeroPapel" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputState">Número de Expediente</label>
+                <input type="text" name="filterExpediente" class="form-control" placeholder="Número de Expediente..."
+                  [(ngModel)]="registropara.numeroExpediente" />
+              </div>
+
+              <div class="form-group col-md-3">
+                <label for="inputState">Estado Trámite</label>
+                <select class="form-control " [(ngModel)]="registropara.codEestaTrami" name="tipoDocumento">
+                  <option selected value="">Seleccionar</option>
+                  <option [value]="estado.codElementoTabla" *ngFor="let estado of tipoEstado">
+                    {{ estado.txtDescripcionCorta }}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+          <form>
+            <div class="form-row" style="height: 28px;">
+              <div class="form-group col-md-3 pb-0 pt-0">
+                <label>Fechas de Registro</label>
+              </div>
+            </div>
+          </form>
+          <form class="form-inline pt-0">
+
+            <div class="input-group col-auto pl-0 pb-2">
+              <input [matDatepicker]="miDatepicker" class="form-control" [(ngModel)]="registropara.fecRegistroDesde"
+                name="fecRegistroDesde" style="display: inline; width: 155px;" placeholder="Desde" />
+              <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
+              <mat-datepicker #miDatepicker></mat-datepicker>
+
+              <input [matDatepicker]="miDatepicker2" class="form-control" [(ngModel)]="registropara.fecRegistroHasta"
+                name="fecRegistroHasta" style="display: inline; width: 155px;" placeholder="Hasta" />
+              <mat-datepicker-toggle [for]="miDatepicker2"></mat-datepicker-toggle>
+              <mat-datepicker #miDatepicker2></mat-datepicker>
+            </div>
+            <div class="col-auto pr-1 pb-3">
+              <button type="button" (click)="buscar()" class="form-control btn btn-primary mt-2 form-control-sm  ">
+                Buscar
+              </button>
+            </div>
+          </form>
+          <br>
+
+          <form class="form-inline">
+
+            <div class="col-sm-6 p-0">
+              <button type="button" [routerLink]="['/registroExpediente']"
+                class="form-control btn btn-primary mt-2 form-control-sm">
+                Registrar Documento
+              </button>
+
+            </div>
+          </form>
+
+          <hr class="mt-4 mb-1">
+          <h3 class="colorPrincipal">Listado de documentos</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered mt-2">
+              <thead>
+                <tr>
+                  <th>N</th>
+                  <th scope="col">N° Trámite</th>
+                  <th scope="col">Expediente</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Fecha de Registro</th>
+                  <th scope="col">Estado Tramite</th>
+                  <th scope="col">Acción</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="listRegistros">
+                <tr *ngFor="
+              let registro of listRegistros
+                | paginate: config;
+                let i = index
+            ">
+                  <td *ngIf="config.currentPage==1">{{  i + 1 }}</td>
+                  <td *ngIf="config.currentPage>1">{{((config.currentPage-1)*config.itemsPerPage)+(i+1)}}
+                  </td>
+                  <td>{{ registro.numeroCeroPapel }}</td>
+                  <td>{{ registro.numeroExpediente }}</td>
+                  <td>{{ registro.txtDescripcionTramite }}</td>
+                  <td>{{ registro.fecRegistroTramite }}</td>
+                  <td>{{ registro.descEestaTrami }}</td>
+                  <td>
+                    <a href="javascript: void(0);" (click)="irRegistro(registro.idRegistro, registro.codEestaTrami)">
+                      Ver
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="pageChanged($event)" class="float-right"></pagination-controls>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>

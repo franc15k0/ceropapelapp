@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+      <app-cabecera></app-cabecera>
+
+      <div class="cuerpo p-4 mb-4">
+        <!-- Contenidos -->
+        <div class="container pt-2">
+          <h3 class="colorPrincipal">{{ tituloReg }}</h3>
+          <form (keydown.enter)="$event.preventDefault()" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group row mb-2">
+              <div class="col-12 col-md-5">
+                <label for="nrodocumento">Numero de DNI</label>
+                <input type="text" (keypress)="numberOnly($event)" class="form-control"
+                  (keyup.enter)="buscarDni($event)" (keypress)="numberOnly($event)" [attr.maxlength]="largo"
+                  formControlName="nrodocumento" name="nrodocumento" id="nrodocumento" />
+                <div class="alert-danger container-error-message pr-4"
+                  *ngIf=" isSubmitteddni && f.nrodocumento.invalid">
+                  Por favor ingresar el número del documento
+                </div>
+              </div>
+              <div class="col-12 col-md-2 mt-2">
+                <button class="form-control btn btn-primary  mr-sm-5 mt-4" role="button" type="button"
+                  (click)="buscarDni($event)">
+                  Buscar
+                </button>
+              </div>
+            </div>
+            <div *ngIf="ciudadano" class="pt-4">
+
+
+              <div class="form-group row mb-2">
+                <div class="col-12 col-md-6 ">
+                  <label for="appellidopat">Apellido Paterno:</label>
+                  <input type="text" class="form-control" [value]="ciudadano.txtApellidoPaterno" name="appellidopat"
+                    disabled />
+                </div>
+                <div class="col-12 col-md-6 ">
+                  <label for="appellidomat">Apellido Paterno:</label>
+                  <input type="text" class="form-control" [value]="ciudadano.txtApellidoMaterno" name="appellidomat"
+                    disabled />
+                </div>
+              </div>
+
+              <div class="form-group row mb-2">
+                <div class="col-12 col-md-6 ">
+                  <label for="nombres">Nombres:</label>
+                  <input type="text" class="form-control" [value]="ciudadano.nombres" name="nombres" disabled />
+                </div>
+                <div class="col-12 col-md-6 ">
+                  <label for="direccion">Direccion:</label>
+                  <input type="text" class="form-control" [value]="ciudadano.txtDireccion" name="direccion" disabled />
+                </div>
+              </div>
+
+              <div class="form-group row mb-2">
+                <div class="col-12 col-md-6 col-lg-3">
+                  <label>Sexo</label>
+                  <br>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" name="sexo" id="hombre" value="1" formControlName="sexo"
+                        class="form-check-input mr-2">Hombre
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" name="sexo" id="mujer" value="0" formControlName="sexo"
+                        class="form-check-input mr-2">Mujer
+                    </label>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                  <label for="fecRegistroDesde">Nacimiento:</label>
+                  <br>
+                  <input [matDatepicker]="miDatepicker" class="form-control" formControlName="fechaNacimiento"
+                    name="fecRegistroDesde" style="display: inline; width: 155px;" placeholder="Fec. Nac." />
+                  <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
+                  <mat-datepicker #miDatepicker></mat-datepicker>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                  <label for="correo">Correo Electrónico:</label>
+                  <input type="email" class="form-control" formControlName="correo" name="correo" />
+                  <div class="pt-1">
+
+                    <div class="alert-danger container-error-message pr-4" *ngIf="isSubmitted && f.correo.invalid">
+                      Correo es requerido
+                    </div>
+
+                    <div class="alert-danger " *ngIf="f.correo.invalid && (f.correo.dirty || f.correo.touched)">
+                      <div class="container-error-message" *ngIf="f.correo.errors.required">
+                        Correo es requerido
+                      </div>
+                      <div class="container-error-message" *ngIf="f.correo.errors.minlength">
+                        El correo deberia tener 5 caracteres.
+                      </div>
+                      <div class="container-error-message" *ngIf="
+                                                  (f.correo.dirty || f.correo.touched) &&
+                                                  f.correo.invalid &&
+                                                  f.correo.errors.pattern
+                                                ">
+                        El valor del correo es invalido.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                  <label for="celular">Nro Celular:</label>
+                  <input type="text" class="form-control" (keypress)="numberOnly($event)" maxlength="9"
+                    formControlName="celular" name="telefono1" />
+                  <div class="pt-1">
+                    <div class="alert-danger container-error-message" *ngIf="isSubmitted && f.celular.invalid">
+                      Nro de Celular es requerido
+                    </div>
+                    <div class="alert-danger" *ngIf="
+                                        f.celular.invalid && (f.celular.dirty || f.celular.touched)
+                                      ">
+                      <div class="container-error-message" *ngIf="f.celular.errors.required">
+                        Nro de Celular es requerido
+                      </div>
+                      <div class="container-error-message" *ngIf="f.celular.errors.minlength">
+                        El Nro de Celular deberia tener 9 numeros.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="form-group row pt-3">
+                <div class="col-12 col-md-2">
+                  <button class="form-control btn btn-primary" role="button">
+                    Guardar
+                  </button>
+                </div>
+                <div class="col-12 col-md-2 pt-2 pt-md-0">
+                  <button class="form-control btn btn-primary" [routerLink]="['/perfil']" role="button">
+                    Regresar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="row">
+
+  <!-- Sidebar -->
+  <div class="col-lg-6 m-0 d-none d-lg-block">
+    <div class="saludo p-0 m-0">
+      <div class="container m-0">
+        <h1 class="principal text-center mt-4 pb-3" style="color: #2d3165; font-size: 65px;font-weight: bold;">
+          Bienvenidos</h1>
+        <h2 class="text-center principal mt-4 pb-3">Sistema de Trámite Cero Papel – MINAM</h2>
+      </div>
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="col-lg-6 m-0">
+    <div class="mainContent ">
+      <!-- Top -->
+      <div class="cuerpo mt-4 p-sm-0 p-md-5 mb-5">
+        <!-- Contenidos -->
+        <div class="formLogin">
+          <!-- Formulario -->
+          <img width="270px" class="d-block mx-auto" src="assets/images/logo_minam.jpg" />
+          <h1 class="text-center colorPrincipal font-weight-bold mt-4 mb-4">
+            Ingresar
+          </h1>
+
+          <div class="input-group input-group-sm mb-4">
+            <input id="user" type="text" [(ngModel)]="usuario.username"
+              class="form-control border border-secondary bg-light" placeholder="Ingrese su n.º de documento"
+              required="" />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <fa-icon [icon]="faUserCircle"></fa-icon>
+              </span>
+            </div>
+          </div>
+          <div class="input-group input-group-sm mb-4">
+            <input type="password" class="form-control border border-secondary bg-light" id="pass" name="pass"
+              [(ngModel)]="usuario.password" placeholder="Ingrese su contraseña" required="" />
+            <div class="input-group-append">
+              <span class="input-group-text">
+                <fa-icon [icon]="faLock"></fa-icon>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col">
+              <div class="form-group form-check text-center">
+                <a [attr.href]="srcManual" class="text-center">Manual de Usuario</a>
+              </div>
+              <div class="form-group form-check text-center">
+                <a [routerLink]="['/recuperaContra']" class="text-center">¿Olvidaste tu contraseña?</a>
+              </div>
+            </div>
+          </div>
+          <button (click)="login()" type="button" class="btn btn-primary btn-lg btn-block" name="btnLogin">
+            Acceder
+          </button>
+
+          <p class="text-center">
+            <a [routerLink]="['/registro']">Registrarse</a>
+          </p>
+        </div>
+      </div>
+      <!-- Content -->
+    </div>
+  </div>
+</div>

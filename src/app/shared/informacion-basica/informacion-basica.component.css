@@ -1,0 +1,17 @@
+.colorPrincipal {
+  color: #005286;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Varela Round', sans-serif;
+
+}
+
+.btn-primary {
+  background-color: #005286;
+  border: none;
+}
+
+.principal {
+  line-height: 45px;
+  font-weight: 900;
+  font-size: 50px;
+}

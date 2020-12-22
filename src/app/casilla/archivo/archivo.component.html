@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+
+      <app-cabecera></app-cabecera>
+      <div class="cuerpo mt-3 p-0 mb-4">
+        <div class="container pt-3 pb-2">
+          <app-informacion-basica [usuario]="usuario">
+          </app-informacion-basica>
+          <h5 class="colorPrincipal">El Documento {{nombreDocumento}} con expediente Nro. {{nroExpediente}} tiene los
+            siguientes
+            archivos</h5>
+
+          <hr class="mt-3 mb-1">
+          <div class="table-responsive">
+            <table class="table table-bordered mt-2">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="
+              let archivo of listArchivoNotificacion
+              let i = index
+            ">
+                  <td scope="row">{{ i + 1 }}</td>
+                  <td>{{ archivo.nombre }}</td>
+                  <td>
+                    <a href="javascript: void(0);"
+                      (click)="downloadFile(rutaapi + archivo.idArchivo, archivo.nombre)">
+                      <fa-icon [icon]="faCloudDownloadAlt" size="sm"></fa-icon> Descar.
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="form-row float-right">
+            <div class="col ml-2">
+              <button type="button" [routerLink]="['/casillaElectronica']"
+                class="form-control btn btn-primary mt-2 form-control-sm ">
+                Volver
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

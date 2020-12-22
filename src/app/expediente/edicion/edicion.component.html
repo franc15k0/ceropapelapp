@@ -1,0 +1,229 @@
+<div class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+
+
+
+
+      <app-cabecera></app-cabecera>
+      <div class="cuerpo p-4 mb-4">
+        <!-- Contenidos -->
+        <div class="container pt-2">
+          <h3 class="colorPrincipal text-center">{{ tituloNuevoReg }}</h3>
+          <app-informacion-basica [usuario]="usuario">
+          </app-informacion-basica>
+          <hr class="mt-1">
+          <h4 class="colorPrincipal">{{ tituloRegistro }}</h4>
+
+          <div *ngIf="estupa1" class="row">
+            <a [attr.href]="srcFormato" class="col text-danger text-right" target="_blank" download="Formatos">
+              Descargar {{ textoFormatos }}</a>
+          </div>
+          <div *ngIf="estupa2" class="row">
+            <a [attr.href]="srcFormato" class="col text-danger text-right" target="_blank" download="Formatos">
+              Descargar {{ textoFormatos }}</a>
+          </div>
+
+          <form [formGroup]="documentoFormGroup" (ngSubmit)="onSubmit()">
+            <div class="form-group row" style="height: 125px;">
+              <div class="form-group col-md-3 pr-1">
+                <label for="nombres">Descripción</label>
+                <textarea class="form-control" id="txtDescripcionTramite" formControlName="txtDescripcionTramite"
+                  name="txtDescripcionTramite" rows="4" maxlength="200"></textarea>
+
+              </div>
+
+       <!--        <div class="form-group col-md-4">
+                <div class="row">
+                  <div class="col">
+                    <label for="tipoDocumento">Tipo de Documento</label>
+                    <select class="form-control" (change)="onSelectDocumento($event.target.value)"
+                      formControlName="codEtipoDocumento" name="tipoDocumento">
+                      <option [value]="tipo.codElementoTabla" *ngFor="let tipo of tipoDocumentofat">
+                        {{ tipo.txtDescripcionCorta }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="txtNumeroDocumento">Documento</label>
+                    <input type="text" class="form-control" formControlName="txtNumeroArchivo"
+                      name="txtNumeroArchivo" />
+                  </div>
+                </div>
+              </div> -->
+
+              <div class="form-group col-md-3 px-1">
+                <div class="row">
+                  <div class="col">
+                    <label for="tipoDocumento">Tipo de Organo</label>
+                    <select class="form-control" (change)="onSelectOrgano($event.target.value)"
+                      formControlName="codEorgano" name="tipoOrganno">
+                      <option selected disabled value="">Seleccionar</option>
+                      <option [value]="tipo.codElementoTabla" *ngFor="let tipo of tipoOrgano">
+                        {{ tipo.txtDescripcionCorta }}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="txtNumeroDocumento">N° Documento</label>
+                    <input type="text" class="form-control" formControlName="txtNumeroArchivo"
+                      name="txtNumeroArchivo" />
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div class="form-group col-md-6 pl-1">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="tipoDocumento">Tipo de Documento</label>
+                    <select class="form-control" (change)="onSelectDocumento($event.target.value)"
+                      formControlName="codEtipoDocumento" name="tipoDocumento">
+                      <option selected disabled value="">Seleccionar</option>
+                      <option [value]="tipo.codElementoTabla" *ngFor="let tipo of tipoDocumentofat">
+                        {{ tipo.txtDescripcionCorta }}</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label for="tipoSustento">Tipo de Archivo</label>
+                    <select class="form-control" (change)="onSelectSustento($event.target.value)" [class.is-invalid]="
+                      documentoFormGroup.get('codEsustDocumento').touched &&
+                      documentoFormGroup.get('codEsustDocumento').invalid" formControlName="codEsustDocumento"
+                      name="tipoSustento">
+                      <option disabled selected value> </option>
+                      <option [value]="tipo.codElementoTabla" *ngFor="let tipo of tipoSustento">
+                        {{ tipo.txtDescripcionCorta }}
+                      </option>
+                    </select>
+
+                  </div>
+
+                </div>
+                <div class="form-row pt-1">
+                  <div class="col pt-1">
+
+                    <div class="input-group pt-4">
+                      <div class="custom-file">
+                        <input (change)="seleccionarArchivo($event)" type="file" class="custom-file-input"
+                          id="inputGroupFile04" />
+                        <label class="custom-file-label" for="inputGroupFile04">{{nameArchivo}}</label>
+                      </div>
+                    </div>
+                    <div *ngIf="progreso > 0" class="progress" style="height: 30px;">
+                      <div class="progress-bar progress-bar-striped" role="progressbar"
+                        [ngStyle]="{ width: progreso + '%' }" attr.aria-valuenow="{{ progreso }}" aria-valuemin="0"
+                        aria-valuemax="100">
+                        {{ progreso }}%
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row float-right">
+              <div class="col-sm-12 col-xl-12 col-xs-6">
+                <button type="button" (click)="subirDocumento()" [disabled]="!archivoSeleccionada"
+                  class="form-control btn btn-primary mt-2 form-control-sm">
+                  Adicionar
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <hr class="mt-5 mb-4">
+          <div class="table-responsive">
+            <h5 class="colorPrincipal">Lista de Documentos</h5>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Nro</th>
+                  <th>Tipo de Documento</th>
+                  <th>Tipo de Archivo</th>
+                  <th>Numero</th>
+                  <th>Nombre</th>
+                  <th>Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="
+                  let archivo of expediente.archivos;
+                  let indice = index
+                ">
+                  <td>{{ indice + 1 }}</td>
+                  <td>{{ archivo.descTipoDocumento }}</td>
+                  <td>{{ archivo.descTipoSustento }}</td>
+                  <td>{{ archivo.txtNumeroArchivo }}</td>
+                  <td>{{ archivo.nombreArchivo }}
+                    <fa-icon *ngIf="archivo.flgEstaFirmado == '1'" [icon]="faCheckSquare" class="ml-2 text-info">
+                    </fa-icon>
+                  </td>
+                  <td class="m-0 p-0">
+                    <a *ngIf="archivo.flgEsprincipal == '1' && archivo.flgEstaFirmado != '1'"
+                      href="javascript: void(0);" class="btn btn-sm btn-primary"
+                      (click)="abrirModalFirmaDigital(archivo.txtNombreArchivo, indice)">
+                      <fa-icon [icon]="faEdit" size="sm"></fa-icon> Firmar
+                    </a>
+                    <a *ngIf="archivo.flgEsprincipal == '1' && archivo.flgEstaFirmado=='1'"
+                      [attr.href]="ruta_api + archivo.txtNombreArchivo" class="btn btn-sm btn-primary">
+                      <fa-icon [icon]="faDownload" size="sm"></fa-icon> ver Arch. Firm.
+                    </a>
+                    <a href="javascript: void(0);" (click)="eliminarSustento(archivo)"
+                      class="btn btn-sm btn-primary ml-2">
+                      <fa-icon [icon]="faTrashAlt" size="sm"></fa-icon> Elim.
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <hr class="mt-3 mb-4">
+          <h4 class="colorPrincipal">{{   tituloFirma  }}</h4>
+
+          <div class="form-row">
+            <div class="col-auto">
+              <div class="custom-control custom-checkbox ml-1">
+                <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]="terminos"
+                  name="example2" />
+                <label class="custom-control-label" for="customCheck2">
+                  <a [routerLink]="" (click)="abrirTerminos()" class="nav-link py-0 px-0">Yo he leido y estoy de
+                    acuerdo
+                    con
+                    los términos de informacion
+                    consignado</a>
+                </label>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="form-row float-right">
+            <div class="col-auto">
+              <button type="button" (click)="grabarRegistro()" class="btn btn-outline-success mr-3">
+                Grabar
+              </button>
+              <button type="button" [routerLink]="['/bandejaElectronica']" class="btn btn-outline-danger">
+                Cancelar
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>

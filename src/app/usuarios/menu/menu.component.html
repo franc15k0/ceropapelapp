@@ -1,0 +1,24 @@
+<div class="barra-lateral col-12 col-sm-auto">
+<div class="logo">
+  <h2>Trámite Cero Papel</h2>
+</div>
+<nav class="menu d-flex d-sm-block justify-content-center flex-wrap ">
+  <a  *ngFor="let menu of menus" [routerLink]="[menu.accion]"  (click)="accion=menu.accion" [ngClass]="accion == menu.accion ? 'active' : 'no_active'">
+    <div *ngIf="menu.descripcion == 'faArchive'" >
+      <fa-icon [icon]="faArchive" size="sm" ></fa-icon><span>{{menu.nombre}}</span>
+    </div>
+    <div *ngIf="menu.descripcion == 'faEdit'">
+      <fa-icon [icon]="faEdit" size="sm"></fa-icon><span>{{menu.nombre}}</span>
+    </div>
+    <div *ngIf="menu.descripcion == 'faBoxOpen'">
+      <fa-icon [icon]="faBoxOpen" size="sm"></fa-icon><span>{{menu.nombre}}</span>
+    </div>
+    <div *ngIf="menu.descripcion == 'faAddressBook'">
+      <fa-icon [icon]="faAddressBook" size="sm"></fa-icon><span>{{menu.nombre}}</span>
+    </div>
+    <div *ngIf="menu.descripcion == 'faFilePdf'">
+      <fa-icon [icon]="faFilePdf" size="sm"></fa-icon><span>{{menu.nombre}}</span>
+    </div>
+  </a>
+</nav>
+</div>

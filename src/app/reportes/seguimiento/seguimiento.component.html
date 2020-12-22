@@ -1,0 +1,154 @@
+<div *ngIf="authService.isAuthenticated() && authService.hasTipoLDAP()" class="row">
+  <div class="columna col">
+    <div class="widget nueva_entrada">
+
+
+
+      <app-cabecera></app-cabecera>
+      <div class="cuerpo mt-2 p-2 mb-2">
+        <div class="container pt-3 pb-2">
+          <h3 class="colorPrincipal">Filtros</h3>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label for="inputState">Tipo de documento</label>
+                <select class="form-control" [(ngModel)]="reportepara.codEtipoDocumento" name="codEtipoDocumento" (change)="onSelectDocumento($event.target.value)">
+                  <option selected value="">Seleccionar</option>
+                  <option [value]="tipo.value" *ngFor="let tipo of tipoDocumentos">{{ tipo.viewValue }}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="inputCity">Número de documento</label>
+                <input type="text" name="numDocumentoPersona" class="form-control" placeholder="Número de Documento..."
+                  [(ngModel)]="reportepara.numDocumentoPersona"  [disabled]="sinTipoSeleccionado"/>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="filterExpediente">Número de Expediente</label>
+                <input type="text" name="filterExpediente" class="form-control" placeholder="Número de Expediente..."
+                  [(ngModel)]="reportepara.numero" />
+              </div>
+              <div class="form-group col-md-3">
+                <label for="filterExpediente">Estado</label>
+                <select class="form-control" [(ngModel)]="reportepara.codEestaTrami" name="codEestaTrami">
+                  <option selected value="">Seleccionar</option>
+                  <option [value]="estado.codElementoTabla" *ngFor="let estado of tipoEstado">
+                    {{ estado.txtDescripcionCorta }}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+
+          <form>
+            <div class="form-row mt-0 pt-0" style="height: 82px;">
+              <div class="form-group col-md-3">
+                <label for="filterExpediente">Nombres de Persona</label>
+                <input type="text" name="nombres" class="form-control" placeholder="Nombres de Persona"
+                  [(ngModel)]="reportepara.nombres" oninput="this.value = this.value.toUpperCase()"/>
+              </div>
+              <div class="form-group col-md-3">
+                <label for="txtRazonSocial">Razón Social</label>
+                <input type="text" name="txtRazonSocial" class="form-control" placeholder="Razón Social..."
+                  [(ngModel)]="reportepara.txtRazonSocial" oninput="this.value = this.value.toUpperCase()"/>
+              </div>
+              <div class="form-group col-md-5">
+                <form class="form-inline">
+                  <label for="txtRazonSocial">Fecha Registro</label>
+                  <div class="input-group col-auto pl-0 pt-0 pr-0 pb-2 pt-2">
+                    <input [matDatepicker]="miDatepicker" class="form-control" [(ngModel)]="reportepara.fecRegistroDesd"
+                      name="fecRegistroDesd" style="display: inline; width: 155px;" placeholder="Registro desde" />
+                    <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #miDatepicker></mat-datepicker>
+
+                    <input [matDatepicker]="miDatepicker2" class="form-control"
+                      [(ngModel)]="reportepara.fecRegistroHast" name="fecRegistroHast"
+                      style="display: inline; width: 155px;" placeholder="Registro hasta" />
+                    <mat-datepicker-toggle [for]="miDatepicker2"></mat-datepicker-toggle>
+                    <mat-datepicker #miDatepicker2></mat-datepicker>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </form>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-5 pl-0 mr-0">
+                <form class="form-inline p-0 pb-0">
+                  <label for="txtRazonSocial">Fecha Envío</label>
+                  <div class="input-group col-auto pl-0 pt-2">
+                    <input [matDatepicker]="miDatepicker3" class="form-control" [(ngModel)]="reportepara.fecEnviaDesd"
+                      name="fecEnviaDesd" style="display: inline; width: 155px;" placeholder="Envío Desde" />
+                    <mat-datepicker-toggle [for]="miDatepicker3"></mat-datepicker-toggle>
+                    <mat-datepicker #miDatepicker3></mat-datepicker>
+
+                    <input [matDatepicker]="miDatepicker4" class="form-control" [(ngModel)]="reportepara.fecEnviaHast"
+                      name="fecEnviaHast" style="display: inline; width: 155px;" placeholder="Envío Hasta" />
+                    <mat-datepicker-toggle [for]="miDatepicker4"></mat-datepicker-toggle>
+                    <mat-datepicker #miDatepicker4></mat-datepicker>
+                  </div>
+                </form>
+              </div>
+              <div class="form-group col-md-2 pl-0 pt-4">
+                <button type="button" (click)="buscar()" class="form-control btn btn-primary mt-2 form-control-sm">
+                  Buscar
+                </button>
+              </div>
+            </div>
+          </form>
+          <form class="form-inline">
+            <div class="input-group col-xl-3 col-sm-8 pl-0 pt-0 pr-0 pb-2">
+              <button type="button" (click)="excell()" class="form-control btn btn-primary mt-2 form-control-sm">
+                Exportar Excel
+              </button>
+              <button type="button" (click)="pdf()" class="form-control btn btn-primary mt-2 form-control-sm ml-3">
+                Exportar Pdf
+              </button>
+            </div>
+          </form>
+          <hr class="mb-2" />
+          <h3 class="colorPrincipal">Listado</h3>
+          <div class="table-responsive" #TABLE #table>
+            <table class="table table-bordered mt-2">
+              <thead>
+                <tr>
+                  <th class="text-center align-middle">N°</th>
+                  <th class="align-middle">Expediente</th>
+                  <th scope="col" class="text-center align-middle">Tipo Documento</th>
+                  <th scope="col" class="text-center align-middle">N° Doc.</th>
+                  <th scope="col" class="text-center align-middle">Administrado</th>
+                  <th scope="col" class="text-center align-middle">
+                    Correo Electrónico
+                  </th>
+                  <th scope="col" class="text-center align-middle">Descripción</th>
+                  <th scope="col" class="text-center align-middle">Estado</th>
+                  <th scope="col" class="text-center align-middle">F. Registro</th>
+                  <th scope="col" class="text-center align-middle">F. Envío</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="listReporte">
+                <tr *ngFor="
+                let reporte of listReporte | paginate: config;
+                let i = index
+              ">
+                  <td *ngIf="config.currentPage==1">{{  i + 1 }}</td>
+                  <td *ngIf="config.currentPage>1">{{((config.currentPage-1)*config.itemsPerPage)+(i+1)}}
+                  </td>
+                  <td>{{ reporte.numero }}</td>
+                  <td>{{ reporte.descTipoDoc }}</td>
+                  <td>{{ reporte.numDocumentoPersona }}</td>
+                  <td>{{ reporte.nombres }}</td>
+                  <td>{{ reporte.txtCorreoElectronico }}</td>
+                  <td>{{ reporte.txtDescripcionTramite }}</td>
+                  <td>{{ reporte.descEstaTrami }}</td>
+                  <td>{{ reporte.fecRegistroTramite }}</td>
+                  <td>{{ reporte.fecEnvioTramite }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="pageChanged($event)" class="float-right"></pagination-controls>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
